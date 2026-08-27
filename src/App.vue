@@ -4,6 +4,8 @@ import Header from "./components/Header.vue";
 import TimetableItem from "./components/TimetableItem.vue";
 import { TimetableItemType, DayOfWeek } from "./Types";
 import DaySelector from "./components/DaySelector.vue";
+import RouterBar from './components/RouterBar.vue';
+
 
 const today = ref(Temporal.Now.plainDateISO().dayOfWeek);
 const selectedDay = ref(today);
@@ -46,6 +48,7 @@ const daySelectedHandler = (day: number) => {
         />
       </div>
     </div>
+    <RouterBar />
   </div>
 </template>
 
@@ -53,7 +56,7 @@ const daySelectedHandler = (day: number) => {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 body {
   background: #ffffff;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 52%, rgba(209, 254, 255, 1) 100%);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.25) 52%, rgba(209, 254, 255, 1) 100%);
   background-attachment: fixed;
 }
 </style>

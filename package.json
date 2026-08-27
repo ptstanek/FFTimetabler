@@ -16,5 +16,8 @@
   },
   "scripts": {
     "debug": "parcel src/index.html"
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.34.0"
   }
 }
