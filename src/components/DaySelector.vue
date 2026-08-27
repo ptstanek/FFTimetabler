@@ -2,18 +2,9 @@
 // TODO: fix this bomboclattery
 
 import { ref, emit } from 'vue';
+import { DayOfWeek } from '../Types';
 
 const emit = defineEmits(['daySelected']);
-
-const DayOfWeek = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
 
 const selectedDay = ref(0);
 
@@ -26,8 +17,8 @@ const clickHandler = (index: number) => {
 </script>
 
 <template>
-    <div class="flex flex-row justify-center">
-        <button @click="clickHandler(index)"class="border-1 m-1 p-2 bg-white shadow-2xl w-10 rounded-sm focus:ring ring-blue-400 ring-inset" id="selectorButton" v-for="(day, index) in DayOfWeek">
+    <div class="flex flex-row justify-center px-2">
+        <button @click="clickHandler(index)" :class="{'selectorButton--selected': selectedDay === index}" class="selectorButton" v-for="(day, index) in DayOfWeek">
             {{day.toString()[0]}}
         </button>
     </div>
@@ -36,5 +27,20 @@ const clickHandler = (index: number) => {
 <style scoped>
 button {
     font-family: Consolas
+}
+
+.selectorButton {
+    border: 1px solid;
+    margin: 0.25rem;
+    padding: 0.5rem;
+    background-color: white;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 0.125rem;
+}
+
+.selectorButton--selected {
+    background-color: #90c6fc;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 </style>

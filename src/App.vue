@@ -2,22 +2,12 @@
 import { ref } from "vue";
 import Header from "./components/Header.vue";
 import TimetableItem from "./components/TimetableItem.vue";
-import { TimetableItemType } from "./Types";
+import { TimetableItemType, DayOfWeek } from "./Types";
 import DaySelector from "./components/DaySelector.vue";
 
 const today = ref(Temporal.Now.plainDateISO().dayOfWeek);
-const selectedDay = ref(0);
+const selectedDay = ref(today);
 // the query for the api would then be for the user, and then the day of week to get all of the timetable items for that day.
-
-const DayOfWeek = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
 
 const timetableItems: TimetableItemType[] = [
   {
@@ -62,6 +52,8 @@ const daySelectedHandler = (day: number) => {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 body {
-  background-color: #f0f0f0;
+  background: #ffffff;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 52%, rgba(209, 254, 255, 1) 100%);
+  background-attachment: fixed;
 }
 </style>
