@@ -1,12 +1,12 @@
 <script setup lang="ts">
 // TODO: fix this bomboclattery
 
-import { ref, emit } from 'vue';
+import { ref, emit, inject } from 'vue';
 import { DayOfWeek } from '../Types';
 
 const emit = defineEmits(['daySelected']);
 
-const selectedDay = ref(0);
+const selectedDay = ref(inject('today').value-1); // not a fan of how this works but it does work
 
 const clickHandler = (index: number) => {
     selectedDay.value = index;
