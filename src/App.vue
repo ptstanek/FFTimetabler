@@ -6,7 +6,9 @@ import { TimetableItemType, DayOfWeek } from './Types';
 import DaySelector from "./components/DaySelector.vue";
 import RouterBar from "./components/RouterBar.vue";
 
-const today = ref(Temporal.Now.plainDateISO().dayOfWeek);
+import { Calendar } from "@lucide/vue";
+
+const today = Temporal.Now.plainDateISO().dayOfWeek;
 const selectedDay = ref(today);
 // the query for the api would then be for the user, and then the day of week to get all of the timetable items for that day.
 
@@ -53,10 +55,10 @@ const filteredItems = computed(() => {
 <template>
   <div>
     <Header />
-    <div class="m-2 text-lg">
-      <h1>Today: {{ DayOfWeek[today - 1] }}</h1>
+    <div class="px-1 m-2 flex flex-row text-md py-0 bg-white shadow-xl ring-1 p-3 text-shadow-lg">
+      <Calendar style="padding-right: 5px;"/>
+      <h1><em>Today: {{ DayOfWeek[today-1] }}</em></h1>
     </div>
-    <p>{{ DayOfWeek[selectedDay - 1] }}</p>
     <DaySelector @daySelected="daySelectedHandler" />
     <div id="itemcontainer">
       <div v-for="item in filteredItems">

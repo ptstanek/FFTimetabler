@@ -20,7 +20,7 @@ const props = defineProps({
 <template>
   <div
     id="timetableitem"
-    class="border bg-white rounded-md m-3 p-1 shadow-sm flex flex-col " >
+    class="border bg-gradient-to-t from-gray-100 to-white rounded-md m-3 p-1 shadow-xl flex flex-col" >
     <div class="flex justify-between">
         <h1>
             <em><strong>{{props.className}}</strong></em>

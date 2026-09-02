@@ -6,7 +6,7 @@ import { DayOfWeek } from '../Types';
 
 const emit = defineEmits(['daySelected']);
 
-const selectedDay = ref(inject('today').value-1); // not a fan of how this works but it does work
+const selectedDay = ref<number>(inject('today')-1); // not a fan of how this works but it does work
 
 const clickHandler = (index: number) => {
     selectedDay.value = index;
