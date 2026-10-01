@@ -7,70 +7,16 @@ import DaySelector from "./components/DaySelector.vue";
 import RouterBar from "./components/RouterBar.vue";
 
 import { Calendar } from "@lucide/vue";
+import { Temporal } from "@js-temporal/polyfill";
 
-const today = Temporal.Now.plainDateISO().dayOfWeek;
-const selectedDay = ref(today);
-// the query for the api would then be for the user, and then the day of week to get all of the timetable items for that day.
-
-provide('today', today);
-
-const timetableItems: TimetableItemType[] = [
-  {
-    className: "Software Eng",
-    lecturerName: "Teacher",
-    startTime: "9:30AM",
-    classDuration: "1hr30min",
-    roomNumber: "2.2.10",
-    dayOfWeek: 1,
-  },
-  {
-    className: "Software Eng",
-    lecturerName: "Teacher",
-    startTime: "9:30AM",
-    classDuration: "1hr30min",
-    roomNumber: "2.2.10",
-    dayOfWeek: 1,
-  },
-  {
-    className: "Software Eng",
-    lecturerName: "Teacher",
-    startTime: "9:30AM",
-    classDuration: "1hr30min",
-    roomNumber: "2.2.10",
-    dayOfWeek: 2,
-  },
-];
-
-const daySelectedHandler = (day: number) => {
-  console.log("app.vue - " + day);
-  selectedDay.value = day + 1;
-};
-
-const filteredItems = computed(() => {
-  return timetableItems.filter((item: TimetableItemType) => item.dayOfWeek === selectedDay.value);
-});
+import { RouterView } from "vue-router";
 
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col">
     <Header />
-    <div class="px-1 m-2 flex flex-row text-md py-0 bg-white shadow-xl ring-1 p-3 text-shadow-lg">
-      <Calendar style="padding-right: 5px;"/>
-      <h1><em>Today: {{ DayOfWeek[today-1] }}</em></h1>
-    </div>
-    <DaySelector @daySelected="daySelectedHandler" />
-    <div id="itemcontainer">
-      <div v-for="item in filteredItems">
-        <TimetableItem
-          :lecturerName="item.lecturerName"
-          :startTime="item.startTime"
-          :className="item.className"
-          :roomNumber="item.roomNumber"
-          :classDuration="item.classDuration"
-        />
-      </div>
-    </div>
+    <RouterView />
     <RouterBar />
   </div>
 </template>
