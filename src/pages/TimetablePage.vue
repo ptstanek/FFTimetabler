@@ -29,20 +29,6 @@ const filteredItems = computed(() => {
   return itemStore.timetableItems.filter((item: TimetableItemType) => item.dayOfWeek === selectedDay.value);
 });
 
-const testItem = () => { 
-  console.log("adding item");
-
-  itemStore.add(
-    {
-            className: "className.value",
-            lecturerName: "lecturerName.value",
-            roomNumber: "bomboclat",
-            startTime: "startTime.value",
-            classDuration: "duration.value",
-            dayOfWeek: 1
-    });
-};
-
 </script>
 
 <template>
@@ -63,8 +49,8 @@ const testItem = () => {
         />
       </div>
     </div>
-    <button class="border" @click="testItem">testItem</button>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

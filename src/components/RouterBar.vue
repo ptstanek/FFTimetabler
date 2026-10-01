@@ -24,5 +24,7 @@ div {
     position: absolute;
     width: 100vw;
     border-top: solid 1px;
+    z-index: 10;
+    background-color: white; 
 }
 </style>

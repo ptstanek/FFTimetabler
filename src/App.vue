@@ -14,15 +14,21 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div id="clappeddiv" class="flex flex-col ">
     <Header />
-    <RouterView />
+    <RouterView class="h-full overflow-y-auto"/>
     <RouterBar />
   </div>
 </template>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+#clappeddiv {
+  height: 100vh;
+  width: 100%
+}
+
 body {
   background: #ffffff;
   background: linear-gradient(
@@ -32,4 +38,5 @@ body {
   );
   background-attachment: fixed;
 }
+
 </style>
