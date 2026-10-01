@@ -39,6 +39,9 @@ const filteredItems = computed(() => {
     </div>
     <DaySelector @daySelected="daySelectedHandler" />
     <div id="itemcontainer">
+      <div v-if="filteredItems.length === 0">
+        <h2 class="text-black p-5"><em>[ No Items... ]</em></h2>
+      </div>
       <div v-for="(item, index) in filteredItems" :key="index">
         <TimetableItem
           :lecturerName="item.lecturerName"
