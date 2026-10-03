@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { PlusIcon } from '@lucide/vue';
 import { useTimetableItemStore } from '../stores/timetableItemStore';
 import { DayOfWeek, TimetableItemType } from '../Types';
+import Toast from '../components/Toast.vue';
 
 const timetableItems = useTimetableItemStore();
 
@@ -14,6 +15,9 @@ const _dayOfWeek = ref(-1);
 const roomNumber = ref('');
 
 const validatorMessage = ref<string>('');
+
+const toastTrigger = ref<boolean>(false);
+const toastMessage = ref<string>();
 
 /*
     className: string;
@@ -52,12 +56,15 @@ const createItem = () => {
     }
 
     timetableItems.add(item);
+    toastMessage.value = "Timetable item added.";
+    toastTrigger.value = !toastTrigger.value;
 };
 
 </script>
 
 <template>
-    <div class="m-3">
+    <Toast :text="toastMessage" :toast-trigger="toastTrigger" />
+    <div class="mx-3 overflow-y-auto pb-[70px]">
         <div class="m-2 flex flex-row justify-center">
             <PlusIcon />
             <h1 class="text-xl"><em>New Item</em></h1>
@@ -76,19 +83,19 @@ const createItem = () => {
                 <input type="text" v-model="roomNumber"
                     class="bg-white border-2 rounded-lg w-full shadow-xl my-2 h-10" />
                 <p>Day of Week</p>
-                <select v-model.number="_dayOfWeek" name="dayOfWeek">
+                <select v-model.number="_dayOfWeek" name="dayOfWeek" class="border-2 rounded-md">
                     <option disabled value="-1">Select a day</option>
                     <option v-for="(day, index) in DayOfWeek" :key="day" :value="index + 1">
                         {{ day }}
                     </option>
                 </select>
-                <p>Start Time (HH:MM)</p>
+                <p class="pt-3">Start Time (HH:MM)</p>
                 <input type="text" v-model="startTime"
                     class="bg-white border-2 rounded-lg w-[30%] shadow-xl my-2 h-10" />
                 <p>Duration (e.g 1hr30m)</p>
                 <input type="text" v-model="duration"
-                    class="bg-white border-2 rounded-lg w-[30%] shadow-xl my-2 h-10" />
-                <button type="submit" class="block border-2 py-3 my-2 bg-cornflower"><em>Create</em></button>
+                    class="bg-white border-2 rounded-lg w-[30%] shadow-xl my-2 h-10" /><br>
+                <button type="submit" class="border-2 py-3 my-2 w-full bg-cornflower"><em>Create</em></button>
             </form>
         </div>
     </div>
