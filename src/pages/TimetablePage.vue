@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, computed, provide } from "vue";
+import { ref, computed, provide, onMounted } from "vue";
 import Header from "../components/Header.vue";
 import TimetableItem from "..//components/TimetableItem.vue";
 import { TimetableItemType, DayOfWeek } from '../Types';
@@ -27,6 +27,10 @@ const daySelectedHandler = (day: number) => {
 const filteredItems = computed(() => {
   //return timetableItems.value.filter((item: TimetableItemType) => item.dayOfWeek === selectedDay.value);
   return itemStore.timetableItems.filter((item: TimetableItemType) => item.dayOfWeek === selectedDay.value);
+});
+
+onMounted(async () => {
+  itemStore.loadFromLocalStorage();
 });
 
 </script>

@@ -43,8 +43,6 @@ const removeItemHandler = () => {
         dayOfWeek: props.dayOfWeek!,
         uuid: props.uuid!
     });
-
-    console.log("item delete");
 };
 
 </script>
