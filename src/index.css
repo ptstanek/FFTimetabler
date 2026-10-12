@@ -3,3 +3,7 @@
 @theme {
     --color-cornflower: #90c6fc;
 }
+
+.ios-scroll {
+  -webkit-overflow-scrolling: touch;
+}

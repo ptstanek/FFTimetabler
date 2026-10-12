@@ -13,7 +13,7 @@ import { LucideProps } from '@lucide/vue';
             class="p-3 m-3 border-1 border-gray-400 rounded-lg cursor-pointer" />
         <Wand @click="router.push('/new')" :size="50"
             class="p-3 m-3 border-1 border-gray-400 rounded-lg cursor-pointer" />
-        <Settings :size="50" class="p-3 m-3 border-1 border-gray-400 rounded-lg cursor-pointer" />
+        <Settings @click="router.push('/settings')" :size="50" class="p-3 m-3 border-1 border-gray-400 rounded-lg cursor-pointer" />
     </div>
 </template>
 

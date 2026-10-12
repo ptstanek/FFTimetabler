@@ -39,12 +39,8 @@ body {
       rgba(255, 255, 255, 0.25) 52%,
       rgba(209, 254, 255, 1) 100%);
   background-attachment: fixed;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
-
 }
 
-.ios-scroll {
-  -webkit-overflow-scrolling: touch;
-}
 </style>
