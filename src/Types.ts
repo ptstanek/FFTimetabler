@@ -5,6 +5,7 @@ export interface TimetableItemType {
     startTime: string;
     classDuration: string;
     dayOfWeek: number;
+    uuid: string; 
 };
 
 export const DayOfWeek: string[] = [

@@ -4,6 +4,7 @@ import { PlusIcon } from '@lucide/vue';
 import { useTimetableItemStore } from '../stores/timetableItemStore';
 import { DayOfWeek, TimetableItemType } from '../Types';
 import Toast from '../components/Toast.vue';
+import { v4 as uuidv4 } from 'uuid';
 
 const timetableItems = useTimetableItemStore();
 
@@ -43,6 +44,8 @@ const createItem = () => {
         _dayOfWeek.value === -1
     ) {
         validatorMessage.value = 'One or more required fields are missing.';
+        toastMessage.value = "Can't create item - invalid fields";
+        toastTrigger.value = !toastTrigger.value;
         return;
     }
 
@@ -52,7 +55,8 @@ const createItem = () => {
         startTime: startTime.value,
         classDuration: duration.value,
         roomNumber: roomNumber.value,
-        dayOfWeek: _dayOfWeek.value // TODO: fix this later. this is improper naming and will cause confusion at some stage.
+        dayOfWeek: _dayOfWeek.value, // TODO: fix this later. this is improper naming and will cause confusion at some stage.
+        uuid: uuidv4()
     }
 
     timetableItems.add(item);

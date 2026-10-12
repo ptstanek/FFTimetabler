@@ -2,7 +2,7 @@
 import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
 
 const props = defineProps({ text: String, toastTrigger: Boolean });
-const visible = ref(true);
+const visible = ref(false);
 let timeout: ReturnType<typeof setTimeout>;
 
 function trigger () {

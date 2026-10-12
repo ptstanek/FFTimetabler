@@ -49,6 +49,7 @@ const filteredItems = computed(() => {
           :className="item.className"
           :roomNumber="item.roomNumber"
           :classDuration="item.classDuration"
+          :uuid="item.uuid"
         />
       </div>
     </div>
