@@ -14,10 +14,14 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div id="clappeddiv" class="flex flex-col ">
+  <div id="clappeddiv" class="flex flex-col h-screen">
     <Header />
-    <RouterView class="h-full overflow-y-auto"/>
-    <RouterBar />
+
+    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll">
+      <RouterView />
+    </main>
+
+    <RouterBar class="" />
   </div>
 </template>
 
@@ -25,18 +29,22 @@ import { RouterView } from "vue-router";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 #clappeddiv {
-  height: 100vh;
+  height: 100dvh;
   width: 100%
 }
 
 body {
   background: #ffffff;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.25) 52%,
-    rgba(209, 254, 255, 1) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(255, 255, 255, 0.25) 52%,
+      rgba(209, 254, 255, 1) 100%);
   background-attachment: fixed;
+  height: 100vh;
+  overflow: hidden;
+
 }
 
+.ios-scroll {
+  -webkit-overflow-scrolling: touch;
+}
 </style>

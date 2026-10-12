@@ -68,14 +68,14 @@ const createItem = () => {
 
 <template>
     <Toast :text="toastMessage" :toast-trigger="toastTrigger" />
-    <div class="mx-3 overflow-y-auto pb-[70px]">
+    <div class="mx-3 pb-[70px]">
         <div class="m-2 flex flex-row justify-center">
             <PlusIcon />
             <h1 class="text-xl"><em>New Item</em></h1>
         </div>
         <h2 class="text-red-500 shadow-2xl-black" v-if="validatorMessage != ''"><strong>{{ validatorMessage }}</strong>
         </h2>
-        <div class="m-3 flex flex-col">
+        <div class="m-3 pb-10 flex flex-col">
             <form @submit.prevent="createItem">
                 <p>Class Name</p>
                 <input type="text" v-model="className"
