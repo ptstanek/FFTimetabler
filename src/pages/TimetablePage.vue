@@ -30,7 +30,7 @@ const filteredItems = computed(() => {
 });
 
 onMounted(async () => {
-  itemStore.loadFromLocalStorage();
+  // itemStore.loadFromLocalStorage();
 });
 
 </script>

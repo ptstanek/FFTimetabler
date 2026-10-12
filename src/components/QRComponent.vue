@@ -8,9 +8,19 @@ const canvasVisible = ref(false);
 const generateQRCodeHandler = () => {
     canvasVisible.value = true;
     QRCode.toCanvas(document.getElementById('qrcanvas'), id.value, {scale: 8});
+    localStorage.setItem("student_id", id.value);
+    console.log("Saved student ID to local storage");
 };
 
 const id = ref("");
+
+onMounted(() => {
+    // pull student id from local storage if exists
+    if(localStorage.getItem("student_id") !== null) {
+        id.value = localStorage.getItem("student_id")!;
+        generateQRCodeHandler(); // reusing this function because I can
+    }
+});
 
 </script>
 
