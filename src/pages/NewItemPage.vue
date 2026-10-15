@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { PlusIcon } from '@lucide/vue';
 import { useTimetableItemStore } from '../stores/timetableItemStore';
 import { DayOfWeek, TimetableItemType } from '../Types';
@@ -8,14 +8,16 @@ import { v4 as uuidv4 } from 'uuid';
 
 const timetableItems = useTimetableItemStore();
 
-const className = ref('');
-const lecturerName = ref('');
-const startTimeHours = ref('');
-const startTimeMinutes = ref('');
-const durationHours = ref('');
-const durationMinutes = ref('');
-const _dayOfWeek = ref(-1);
-const roomNumber = ref('');
+const formRefs = reactive({
+    className: '',
+    lecturerName: '',
+    startTimeHours: '',
+    startTimeMinutes: '',
+    durationHours: '',
+    durationMinutes: '',
+    _dayOfWeek: -1,
+    roomNumber: '',
+});
 
 const validatorMessage = ref<string>('');
 
@@ -34,18 +36,18 @@ const toastMessage = ref<string>();
 const createItem = () => {
     // console.log("adding item");
 
-    console.log(`_dayOfWeek: ${_dayOfWeek.value}\n`);
+    // console.log(`_dayOfWeek: ${_dayOfWeek.value}\n`);
 
     // validation:
     if (
-        className.value.trim() === '' ||
-        lecturerName.value.trim() === '' ||
-        roomNumber.value.trim() === '' ||
-        startTimeHours.value.trim() === '' ||
-        startTimeMinutes.value.trim() === '' ||
-        durationHours.value.trim() === '' ||
-        durationMinutes.value.trim() === '' ||
-        _dayOfWeek.value === -1
+        formRefs.className.trim() === '' ||
+        formRefs.lecturerName.trim() === '' ||
+        formRefs.roomNumber.trim() === '' ||
+        formRefs.startTimeHours.trim() === '' ||
+        formRefs.startTimeMinutes.trim() === '' ||
+        formRefs.durationHours.trim() === '' ||
+        formRefs.durationMinutes.trim() === '' ||
+        formRefs._dayOfWeek === -1
     ) {
         validatorMessage.value = 'One or more required fields are missing.';
         toastMessage.value = "Can't create item - invalid fields";
@@ -54,12 +56,12 @@ const createItem = () => {
     }
 
     const item: TimetableItemType = {
-        className: className.value,
-        lecturerName: lecturerName.value,
-        startTime: startTimeHours.value.concat(":", startTimeMinutes.value),
-        classDuration: durationHours.value.concat("hr", durationMinutes.value, "m"),
-        roomNumber: roomNumber.value,
-        dayOfWeek: _dayOfWeek.value, // TODO: fix this later. this is improper naming and will cause confusion at some stage.
+        className: formRefs.className,
+        lecturerName: formRefs.lecturerName,
+        startTime: formRefs.startTimeHours.concat(":", formRefs.startTimeMinutes),
+        classDuration: formRefs.durationHours.concat("hr", formRefs.durationMinutes, "m"),
+        roomNumber: formRefs.roomNumber,
+        dayOfWeek: formRefs._dayOfWeek, // TODO: fix this later. this is improper naming and will cause confusion at some stage.
         uuid: uuidv4()
     }
 
@@ -82,16 +84,16 @@ const createItem = () => {
         <div class="m-3 pb-10 flex flex-col">
             <form @submit.prevent="createItem">
                 <p>Class Name</p>
-                <input type="text" v-model="className"
+                <input type="text" v-model="formRefs.className"
                     class="bg-white border-2 rounded-lg w-full shadow-xl my-2 h-10" />
                 <p>Lecturer</p>
-                <input type="text" v-model="lecturerName"
+                <input type="text" v-model="formRefs.lecturerName"
                     class="bg-white border-2 rounded-lg w-full shadow-xl my-2 h-10" />
                 <p>Room Number</p>
-                <input type="text" v-model="roomNumber"
+                <input type="text" v-model="formRefs.roomNumber"
                     class="bg-white border-2 rounded-lg w-full shadow-xl my-2 h-10" />
                 <p>Day of Week</p>
-                <select v-model.number="_dayOfWeek" name="dayOfWeek" class="border-2 rounded-md">
+                <select v-model.number="formRefs._dayOfWeek" name="dayOfWeek" class="border-2 rounded-md">
                     <option disabled value="-1">Select a day</option>
                     <option v-for="(day, index) in DayOfWeek" :key="day" :value="index + 1">
                         {{ day }}
@@ -99,16 +101,16 @@ const createItem = () => {
                 </select>
                 <p class="pt-3">Start Time (HH:MM)</p>
                 <div id="starttimebox" class="flex flex-row">
-                    <input type="text" v-model="startTimeHours"
+                    <input type="text" v-model="formRefs.startTimeHours"
                         class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" />
-                        <input type="text" v-model="startTimeMinutes"
+                        <input type="text" v-model="formRefs.startTimeMinutes"
                         class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" />
                 </div>
                 <p>Duration (e.g 1hr30m)</p>
                 <div id="durationbox" class="flex flex-row">
-                    <input type="text" v-model="durationHours"
+                    <input type="text" v-model="formRefs.durationHours"
                         class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" /><br>
-                    <input type="text" v-model="durationMinutes"
+                    <input type="text" v-model="formRefs.durationMinutes"
                         class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10" /><br>
                 </div>
                 <button type="submit" class="border-2 py-3 my-2 w-full bg-cornflower"><em>Create</em></button>
