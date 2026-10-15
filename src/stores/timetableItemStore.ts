@@ -7,7 +7,9 @@ export const useTimetableItemStore = defineStore("timetableitems", () => {
   const timetableItems = ref<TimetableItemType[]>([]);
 
   function loadFromLocalStorage() {
-    timetableItems.value = JSON.parse(localStorage.getItem("items")!);
+    if(localStorage.getItem("items") !== null) {
+      timetableItems.value = JSON.parse(localStorage.getItem("items")!);
+    }
   }
 
   function add(item: TimetableItemType) {
