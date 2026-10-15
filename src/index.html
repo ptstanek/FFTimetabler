@@ -11,6 +11,12 @@
         <meta name="description" content="Timetable App">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./index.css">
+        <link rel="manifest" href="./manifest.json">
+        <script type="module">
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register(new URL('./service-worker.js', import.meta.url), {type: 'module'});
+            }
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>

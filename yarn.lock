@@ -593,6 +593,14 @@
     globals "^13.24.0"
     nullthrows "^1.1.1"
 
+"@parcel/packager-raw-url@2.16.4":
+  version "2.16.4"
+  resolved "https://registry.yarnpkg.com/@parcel/packager-raw-url/-/packager-raw-url-2.16.4.tgz#9e6786bacdd5e1a95ab1c41caccf9b8a397e1a68"
+  integrity sha512-qrpsz/wTlPvYM5qnz3N+3pW0a9MRivrN7TiduoS1W1U/UBhsPoOYNG+S6F67KDCmq47mmBKTgEFN9tEazSV+Qw==
+  dependencies:
+    "@parcel/plugin" "2.16.4"
+    "@parcel/utils" "2.16.4"
+
 "@parcel/packager-raw@2.16.4":
   version "2.16.4"
   resolved "https://registry.yarnpkg.com/@parcel/packager-raw/-/packager-raw-2.16.4.tgz#6390274cc7784e037ccb5ad226777beb588d141e"
@@ -910,6 +918,16 @@
     "@vue/compiler-sfc" "^3.2.27"
     nullthrows "^1.1.1"
     semver "^7.7.1"
+
+"@parcel/transformer-webmanifest@2.16.4":
+  version "2.16.4"
+  resolved "https://registry.yarnpkg.com/@parcel/transformer-webmanifest/-/transformer-webmanifest-2.16.4.tgz#47cd6433440256b13d56783e3e59f3e1e778cd63"
+  integrity sha512-VAgHURTHhgSI8LQwKIt/oGwAxwRLeWC07fKf+s9r3IX2gPHIKC+RNi1qhWFQEL2owVa5k3/J0B1L5k1/+Lmcjw==
+  dependencies:
+    "@mischnic/json-sourcemap" "^0.1.1"
+    "@parcel/diagnostic" "2.16.4"
+    "@parcel/plugin" "2.16.4"
+    "@parcel/utils" "2.16.4"
 
 "@parcel/types-internal@2.16.4":
   version "2.16.4"
@@ -2484,6 +2502,34 @@ word-wrap@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.5.tgz#d2c45c6dd4fbce621a66f136cbe328afd0410b34"
   integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
+
+workbox-core@7.4.1, workbox-core@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-7.4.1.tgz#5a8811ba5d25a2049821a7b66f63ee9b204dc691"
+  integrity sha512-DT+vu46eh/2vRsSHTY4Xmc32Z1rr9PRlQUXr1Dx30ZuXRWwOsvZgGgcwxcasubQLQmbTNYZjv44LkBAQ4tT5tQ==
+
+workbox-precaching@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/workbox-precaching/-/workbox-precaching-7.4.1.tgz#059a88c092e762c341cf080ab88b4e8568af21ae"
+  integrity sha512-cdr/9qByww7yzEp7zg/qI4ukUrrNjQLgN+ONQRpjy/VqGQXwkgHwr00KksGJK8v0VifwDXBb8a4cWNZH71jn3Q==
+  dependencies:
+    workbox-core "7.4.1"
+    workbox-routing "7.4.1"
+    workbox-strategies "7.4.1"
+
+workbox-routing@7.4.1, workbox-routing@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-7.4.1.tgz#159fdd88260fce25f8ab15b46674852ad8aa48eb"
+  integrity sha512-yubJGErZOusuidAenaL5ypfhQOa7urxP/f8E0ws7FPb4039RiWXUWBAyUkmUoOL/BcQGen3h0J8872d51IYxtA==
+  dependencies:
+    workbox-core "7.4.1"
+
+workbox-strategies@7.4.1, workbox-strategies@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-7.4.1.tgz#6efe950e9d434b5d70a6277c4bdcdc5be4dfc8e5"
+  integrity sha512-GZxpaw9NbmOelj7667uZ2kpk5BFpOGbO4X0qjwh5ls8XQ8C+Lha5LQchTiUzsTFSS+NlUpftYAyOVXvQUrcqOQ==
+  dependencies:
+    workbox-core "7.4.1"
 
 wrap-ansi@^6.2.0:
   version "6.2.0"
