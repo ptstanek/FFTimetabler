@@ -10,8 +10,10 @@ const timetableItems = useTimetableItemStore();
 
 const className = ref('');
 const lecturerName = ref('');
-const startTime = ref('');
-const duration = ref('');
+const startTimeHours = ref('');
+const startTimeMinutes = ref('');
+const durationHours = ref('');
+const durationMinutes = ref('');
 const _dayOfWeek = ref(-1);
 const roomNumber = ref('');
 
@@ -39,8 +41,10 @@ const createItem = () => {
         className.value.trim() === '' ||
         lecturerName.value.trim() === '' ||
         roomNumber.value.trim() === '' ||
-        startTime.value.trim() === '' ||
-        duration.value.trim() === '' ||
+        startTimeHours.value.trim() === '' ||
+        startTimeMinutes.value.trim() === '' ||
+        durationHours.value.trim() === '' ||
+        durationMinutes.value.trim() === '' ||
         _dayOfWeek.value === -1
     ) {
         validatorMessage.value = 'One or more required fields are missing.';
@@ -52,8 +56,8 @@ const createItem = () => {
     const item: TimetableItemType = {
         className: className.value,
         lecturerName: lecturerName.value,
-        startTime: startTime.value,
-        classDuration: duration.value,
+        startTime: startTimeHours.value.concat(":", startTimeMinutes.value),
+        classDuration: durationHours.value.concat("hr", durationMinutes.value, "m"),
         roomNumber: roomNumber.value,
         dayOfWeek: _dayOfWeek.value, // TODO: fix this later. this is improper naming and will cause confusion at some stage.
         uuid: uuidv4()
@@ -94,11 +98,19 @@ const createItem = () => {
                     </option>
                 </select>
                 <p class="pt-3">Start Time (HH:MM)</p>
-                <input type="text" v-model="startTime"
-                    class="bg-white border-2 rounded-lg w-[30%] shadow-xl my-2 h-10" />
+                <div id="starttimebox" class="flex flex-row">
+                    <input type="text" v-model="startTimeHours"
+                        class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" />
+                        <input type="text" v-model="startTimeMinutes"
+                        class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" />
+                </div>
                 <p>Duration (e.g 1hr30m)</p>
-                <input type="text" v-model="duration"
-                    class="bg-white border-2 rounded-lg w-[30%] shadow-xl my-2 h-10" /><br>
+                <div id="durationbox" class="flex flex-row">
+                    <input type="text" v-model="durationHours"
+                        class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10 mr-2" /><br>
+                    <input type="text" v-model="durationMinutes"
+                        class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10" /><br>
+                </div>
                 <button type="submit" class="border-2 py-3 my-2 w-full bg-cornflower"><em>Create</em></button>
             </form>
         </div>
