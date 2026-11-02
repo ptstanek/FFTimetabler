@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, provide, onMounted } from "vue";
+import { ref, computed, provide, onMounted, watch } from "vue";
 import Header from "./components/Header.vue";
 import TimetableItem from "./components/TimetableItem.vue";
 import { TimetableItemType, DayOfWeek } from './Types';
@@ -10,12 +10,16 @@ import { Calendar } from "@lucide/vue";
 import { Temporal } from "@js-temporal/polyfill";
 
 import { RouterView } from "vue-router";
+import { useSettingsStore } from "./stores/settingsStore.ts";
+
+const settingsStore = useSettingsStore();
 
 onMounted(() => {
   navigator.storage.persist().then((persistent) => {
-    if(persistent) { console.log("STORAGE PERSISTENT")}
-    else { console.log("not persistent")}
+    if (persistent) { console.log("STORAGE PERSISTENT") }
+    else { console.log("not persistent") }
   });
+  settingsStore.loadFromLocalStorage();
 });
 
 </script>
@@ -23,8 +27,9 @@ onMounted(() => {
 <template>
   <div id="clappeddiv" class="flex flex-col h-screen">
     <Header />
-
-    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll">
+    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll" :class="!settingsStore.settings.redMode
+      ? 'bg-[linear-gradient(0deg,rgba(255,255,255,0.25)_52%,rgba(209,254,255,1)_100%)]'
+      : 'bg-[linear-gradient(0deg,rgba(255,255,255,0.25)_52%,rgba(255,0,145,0.24)_100%)]'">
       <RouterView />
     </main>
 
@@ -42,12 +47,11 @@ onMounted(() => {
 
 body {
   background: #ffffff;
-  background: linear-gradient(0deg,
+  /*background: linear-gradient(0deg,
       rgba(255, 255, 255, 0.25) 52%,
-      rgba(209, 254, 255, 1) 100%);
+      rgba(209, 254, 255, 1) 100%); */
   background-attachment: fixed;
   height: 100dvh;
   overflow: hidden;
 }
-
 </style>
