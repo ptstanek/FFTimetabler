@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, provide } from "vue";
+import { ref, computed, provide, onMounted } from "vue";
 import Header from "./components/Header.vue";
 import TimetableItem from "./components/TimetableItem.vue";
 import { TimetableItemType, DayOfWeek } from './Types';
@@ -10,6 +10,13 @@ import { Calendar } from "@lucide/vue";
 import { Temporal } from "@js-temporal/polyfill";
 
 import { RouterView } from "vue-router";
+
+onMounted(() => {
+  navigator.storage.persist().then((persistent) => {
+    if(persistent) { console.log("STORAGE PERSISTENT"); g_persistent.value = true}
+    else { console.log("not persistent")}
+  });
+});
 
 </script>
 
