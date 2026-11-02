@@ -8,7 +8,7 @@ import { LucideProps } from '@lucide/vue';
 </script>
 
 <template>
-    <div class="flex justify-evenly">
+    <div class="flex justify-evenly pb-5">
         <House @click="router.push('/')" :size="50"
             class="p-3 m-3 border-1 border-gray-400 rounded-lg cursor-pointer" />
         <Wand @click="router.push('/new')" :size="50"
