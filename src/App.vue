@@ -13,7 +13,7 @@ import { RouterView } from "vue-router";
 
 onMounted(() => {
   navigator.storage.persist().then((persistent) => {
-    if(persistent) { console.log("STORAGE PERSISTENT"); g_persistent.value = true}
+    if(persistent) { console.log("STORAGE PERSISTENT")}
     else { console.log("not persistent")}
   });
 });
