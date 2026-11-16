@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, inject } from 'vue';
 import QRCode from 'qrcode';
+import { Theme } from '../util/themes.ts';
 
 const canvasVisible = ref(false);
 
@@ -13,6 +14,7 @@ const generateQRCodeHandler = () => {
 };
 
 const id = ref("");
+const theme: Theme = inject('selectedtheme')!;
 
 onMounted(() => {
     // pull student id from local storage if exists
@@ -29,7 +31,7 @@ onMounted(() => {
         <canvas id="qrcanvas" :class="{'visible: hidden': !canvasVisible}" class="border-1 m-3 rounded-lg shadow-2xl self-center"></canvas>
         <label for="input"><strong>Student ID</strong></label>
         <input type="text" class="border py-2 mb-2" v-model="id"/>
-        <button @click="generateQRCodeHandler" class="border-1 p-2 bg-blue-200">Generate QR</button>
+        <button @click="generateQRCodeHandler" class="border-1 p-2" :style="{ backgroundColor: theme.buttoncolour }">Generate QR</button>
     </div>
 </template>
 

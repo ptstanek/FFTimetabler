@@ -12,7 +12,7 @@ import { Temporal } from "@js-temporal/polyfill";
 import { RouterView } from "vue-router";
 import { useSettingsStore } from "./stores/settingsStore.ts";
 
-import { defaultTheme, redTheme } from './util/themes.ts';
+import { defaultTheme, redTheme, Theme } from './util/themes.ts';
 
 const settingsStore = useSettingsStore();
 
@@ -23,6 +23,12 @@ onMounted(() => {
   });
   settingsStore.loadFromLocalStorage();
   // set theme
+  if(settingsStore.settings.redMode) {
+    provide('selectedtheme', { bgcolour: redTheme.bgcolour, buttoncolour: redTheme.buttoncolour } as Theme)
+  }
+  else {
+    provide('selectedtheme', { bgcolour: defaultTheme.bgcolour, buttoncolour: defaultTheme.buttoncolour } as Theme)
+  }
 });
 
 </script>

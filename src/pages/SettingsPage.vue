@@ -2,7 +2,7 @@
 
 import QRComponent from '../components/QRComponent.vue';
 import { useSettingsStore } from '../stores/settingsStore.ts';
-import { ref } from 'vue';
+import { onMounted, ref, inject } from 'vue';
 
 const settingsStore = useSettingsStore();
 

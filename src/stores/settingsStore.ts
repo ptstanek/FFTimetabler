@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 
 const defaultSettings = { 
     redMode: false,
