@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
+const defaultSettings = { 
+    redMode: false,
+}
+
 export const useSettingsStore = defineStore("settings", () => {
     const settings = ref({
-        redMode: false
+        // redMode: false
     });
 
     function saveSettings() {
@@ -11,8 +15,13 @@ export const useSettingsStore = defineStore("settings", () => {
     }
 
     function loadFromLocalStorage() {
-        if(!localStorage.getItem("settings") === null) {
-            settings.value = JSON.parse(localStorage.getItem("settings")!);
+        const stored = localStorage.getItem('settings');
+
+        if(stored !== null) {
+            settings.value = {
+                ...defaultSettings,
+                ...JSON.parse(stored),
+            }
         }
     }
 

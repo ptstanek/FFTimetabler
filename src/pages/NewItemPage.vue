@@ -55,7 +55,7 @@ const createItem = () => {
         return;
     }
 
-    if(formRefs.startTimeHours.length === 1) { // prepand a zero if the hours field has one digit
+    if(formRefs.startTimeHours.length === 1) { // prepend a zero if the hours field has one digit
         formRefs.startTimeHours = "0".concat(formRefs.startTimeHours);
     }
 
