@@ -12,6 +12,8 @@ import { Temporal } from "@js-temporal/polyfill";
 import { RouterView } from "vue-router";
 import { useSettingsStore } from "./stores/settingsStore.ts";
 
+import { defaultTheme, redTheme } from './util/themes.ts';
+
 const settingsStore = useSettingsStore();
 
 onMounted(() => {
@@ -20,6 +22,7 @@ onMounted(() => {
     else { console.log("not persistent") }
   });
   settingsStore.loadFromLocalStorage();
+  // set theme
 });
 
 </script>
@@ -27,10 +30,12 @@ onMounted(() => {
 <template>
   <div id="clappeddiv" class="flex flex-col h-screen">
     <Header />
-    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll" :class="!settingsStore.settings.redMode
-      ? 'bg-[linear-gradient(0deg,rgba(255,255,255,0.25)_52%,rgba(209,254,255,1)_100%)]'
-      : 'bg-[linear-gradient(0deg,rgba(255,255,255,0.25)_52%,rgba(255,0,145,0.24)_100%)]'">
-      <RouterView />
+    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll"   :style="{
+      backgroundImage: !settingsStore.settings.redMode
+        ? `linear-gradient(0deg, #ffffff 52%, ${defaultTheme.bgcolour} 100%)`
+        : `linear-gradient(0deg, #ffffff 52%, ${redTheme.bgcolour} 100%)`
+    }">
+    <RouterView />
     </main>
 
     <RouterBar class="" />
