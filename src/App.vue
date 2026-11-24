@@ -16,18 +16,26 @@ import { defaultTheme, redTheme, Theme } from './util/themes.ts';
 
 const settingsStore = useSettingsStore();
 
-onMounted(() => {
-  navigator.storage.persist().then((persistent) => {
-    if (persistent) { console.log("STORAGE PERSISTENT") }
-    else { console.log("not persistent") }
-  });
-  settingsStore.loadFromLocalStorage();
-  // set theme
-  if(settingsStore.settings.redMode) {
-    provide('selectedtheme', { bgcolour: redTheme.bgcolour, buttoncolour: redTheme.buttoncolour } as Theme)
-  }
-  else {
-    provide('selectedtheme', { bgcolour: defaultTheme.bgcolour, buttoncolour: defaultTheme.buttoncolour } as Theme)
+// This should be synchronous if loadFromLocalStorage reads localStorage directly.
+settingsStore.loadFromLocalStorage();
+
+if(settingsStore.settings.redMode) {
+  provide('selectedtheme', { bgcolour: redTheme.bgcolour, buttoncolour: redTheme.buttoncolour } as Theme)
+}
+else {
+  provide('selectedtheme', { bgcolour: defaultTheme.bgcolour, buttoncolour: defaultTheme.buttoncolour } as Theme)
+}
+
+onMounted(async () => {
+  try {
+    const storage = navigator.storage;
+
+    if (storage?.persist) {
+      const persistent = await storage.persist();
+      console.log(persistent ? "STORAGE PERSISTENT" : "not persistent");
+    }
+  } catch (error) {
+    console.warn("Could not request persistent storage:", error);
   }
 });
 
