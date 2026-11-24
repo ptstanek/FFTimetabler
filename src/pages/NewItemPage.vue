@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, reactive, inject } from 'vue';
 import { PlusIcon } from '@lucide/vue';
 import { useTimetableItemStore } from '../stores/timetableItemStore';
 import { DayOfWeek, TimetableItemType } from '../Types';
@@ -7,6 +7,7 @@ import Toast from '../components/Toast.vue';
 import { v4 as uuidv4 } from 'uuid';
 
 const timetableItems = useTimetableItemStore();
+const theme: Theme = inject('selectedtheme')!;
 
 const formRefs = reactive({
     className: '',
@@ -117,7 +118,7 @@ const createItem = () => {
                     <input type="text" v-model="formRefs.durationMinutes"
                         class="bg-white border-2 rounded-lg w-[10%] shadow-xl my-2 h-10" /><br>
                 </div>
-                <button type="submit" class="border-2 py-3 my-2 w-full bg-cornflower"><em>Create</em></button>
+                <button type="submit" class="border-2 py-3 my-2 w-full bg-cornflower" :style="{backgroundColor: theme.buttoncolour}"><em>Create</em></button>
             </form>
         </div>
     </div>
