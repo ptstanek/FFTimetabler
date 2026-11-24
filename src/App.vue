@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, provide, onMounted } from "vue";
+import { ref, computed, provide, onMounted, watch } from "vue";
 import Header from "./components/Header.vue";
 import TimetableItem from "./components/TimetableItem.vue";
 import { TimetableItemType, DayOfWeek } from './Types';
@@ -10,12 +10,25 @@ import { Calendar } from "@lucide/vue";
 import { Temporal } from "@js-temporal/polyfill";
 
 import { RouterView } from "vue-router";
+import { useSettingsStore } from "./stores/settingsStore.ts";
+
+import { defaultTheme, redTheme, Theme } from './util/themes.ts';
+
+const settingsStore = useSettingsStore();
 
 onMounted(() => {
   navigator.storage.persist().then((persistent) => {
-    if(persistent) { console.log("STORAGE PERSISTENT")}
-    else { console.log("not persistent")}
+    if (persistent) { console.log("STORAGE PERSISTENT") }
+    else { console.log("not persistent") }
   });
+  settingsStore.loadFromLocalStorage();
+  // set theme
+  if(settingsStore.settings.redMode) {
+    provide('selectedtheme', { bgcolour: redTheme.bgcolour, buttoncolour: redTheme.buttoncolour } as Theme)
+  }
+  else {
+    provide('selectedtheme', { bgcolour: defaultTheme.bgcolour, buttoncolour: defaultTheme.buttoncolour } as Theme)
+  }
 });
 
 </script>
@@ -23,9 +36,12 @@ onMounted(() => {
 <template>
   <div id="clappeddiv" class="flex flex-col h-screen">
     <Header />
-
-    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll">
-      <RouterView />
+    <main class="min-h-0 flex-1 overflow-y-scroll ios-scroll"   :style="{
+      backgroundImage: !settingsStore.settings.redMode
+        ? `linear-gradient(0deg, #ffffff 52%, ${defaultTheme.bgcolour} 100%)`
+        : `linear-gradient(0deg, #ffffff 52%, ${redTheme.bgcolour} 100%)`
+    }">
+    <RouterView />
     </main>
 
     <RouterBar class="" />
@@ -42,12 +58,11 @@ onMounted(() => {
 
 body {
   background: #ffffff;
-  background: linear-gradient(0deg,
+  /*background: linear-gradient(0deg,
       rgba(255, 255, 255, 0.25) 52%,
-      rgba(209, 254, 255, 1) 100%);
+      rgba(209, 254, 255, 1) 100%); */
   background-attachment: fixed;
   height: 100dvh;
   overflow: hidden;
 }
-
 </style>

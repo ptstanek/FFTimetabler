@@ -8,6 +8,7 @@ export const useTimetableItemStore = defineStore("timetableitems", () => {
 
   function loadFromLocalStorage() {
     if(localStorage.getItem("items") !== null) {
+      console.log("items localstorage key is not null");
       timetableItems.value = JSON.parse(localStorage.getItem("items")!);
     }
   }
